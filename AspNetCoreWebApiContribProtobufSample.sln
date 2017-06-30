@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebApiContribProtobufSample", "AspNetCoreWebApiContribProtobufSample.csproj", "{78F0F805-F992-4207-8925-4FC75A66C2DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebApiContribProtobufSample", "AspNetCoreWebApiContribProtobufSample\AspNetCoreWebApiContribProtobufSample.csproj", "{78F0F805-F992-4207-8925-4FC75A66C2DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{53E9854A-5859-4CC1-AD09-00D7099662AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{53E9854A-5859-4CC1-AD09-00D7099662AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtobufHttpClient", "..\ProtobufHttpClient\ProtobufHttpClient.csproj", "{A3B582DD-CB46-4F7D-A71D-2E92473AA6CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtobufHttpClient", "ProtobufHttpClient\ProtobufHttpClient.csproj", "{A3B582DD-CB46-4F7D-A71D-2E92473AA6CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
