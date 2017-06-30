@@ -31,7 +31,7 @@ namespace AspNetCoreWebApiContribProtobufSample.Controllers
             return Ok(table);
         }
 
-        // POST api/values
+        // POST api/table
         [HttpPost]
         public IActionResult Post([FromBody]Table value)
         {
