@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26621.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreWebApiContribProtobufSample", "AspNetCoreWebApiContribProtobufSample\AspNetCoreWebApiContribProtobufSample.csproj", "{B4857B4F-95AC-49F5-A49E-0ED9102008F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{5029C3F8-3CA7-41E2-B73B-3B2BE9B1CAD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4857B4F-95AC-49F5-A49E-0ED9102008F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4857B4F-95AC-49F5-A49E-0ED9102008F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4857B4F-95AC-49F5-A49E-0ED9102008F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4857B4F-95AC-49F5-A49E-0ED9102008F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5029C3F8-3CA7-41E2-B73B-3B2BE9B1CAD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5029C3F8-3CA7-41E2-B73B-3B2BE9B1CAD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5029C3F8-3CA7-41E2-B73B-3B2BE9B1CAD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5029C3F8-3CA7-41E2-B73B-3B2BE9B1CAD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC342408-D9D3-4675-ABFF-2F9259E7C7DC}
+	EndGlobalSection
+EndGlobal
