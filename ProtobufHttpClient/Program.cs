@@ -42,7 +42,8 @@ namespace ProtobufHttpClient
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));//ACCEPT header
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:31004/api/tables");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, 
+                "http://localhost:31004/api/tables");
 
             MemoryStream stream = new MemoryStream();
             ProtoBuf.Serializer.Serialize<Table>(stream, new Table {
@@ -54,11 +55,9 @@ namespace ProtobufHttpClient
             var myStr = sr.ReadToEnd();
 
             request.Content = new StringContent(myStr,
-                                                Encoding.UTF8,
-                                                "application/x-protobuf");//CONTENT-TYPE header
+                Encoding.UTF8,
+                "application/x-protobuf");//CONTENT-TYPE header
 
-            
-            // HTTP POST with Protobuf Request Body
             var responseForPost = client.SendAsync(request).Result;
 
             var resultData = ProtoBuf.Serializer.Deserialize<Table>(await responseForPost.Content.ReadAsStreamAsync());
