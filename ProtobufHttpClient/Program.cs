@@ -21,6 +21,11 @@ namespace ProtobufHttpClient
             var table = PostDataToServerAsync().Result;
 
             Console.WriteLine($"Sent data with Name: {table.Name} to the server");
+            //Console.ReadLine();
+
+            var tableB = PostStreamDataToServerAsync().Result;
+
+            Console.WriteLine($"Sent data with Name: {tableB.Name} to the server");
             Console.ReadLine();
         }
 
@@ -42,7 +47,7 @@ namespace ProtobufHttpClient
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));//ACCEPT header
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, 
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
                 "http://localhost:31004/api/tables");
 
             MemoryStream stream = new MemoryStream();
@@ -58,6 +63,33 @@ namespace ProtobufHttpClient
                 Encoding.UTF8,
                 "application/x-protobuf");//CONTENT-TYPE header
 
+            var responseForPost = client.SendAsync(request).Result;
+
+            var resultData = ProtoBuf.Serializer.Deserialize<Table>(await responseForPost.Content.ReadAsStreamAsync());
+            return resultData;
+        }
+
+        static async System.Threading.Tasks.Task<Table> PostStreamDataToServerAsync()
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders
+                  .Accept
+                  .Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
+                "http://localhost:31004/api/tables");
+
+            MemoryStream stream = new MemoryStream();
+            ProtoBuf.Serializer.Serialize<Table>(stream, new Table
+            {
+                Name = "jim",
+                Dimensions = "190x80x90",
+                Description = "top of the range from Migro"
+            });
+
+            request.Content = new ByteArrayContent(stream.ToArray());
+
+            // HTTP POST with Protobuf Request Body
             var responseForPost = client.SendAsync(request).Result;
 
             var resultData = ProtoBuf.Serializer.Deserialize<Table>(await responseForPost.Content.ReadAsStreamAsync());
