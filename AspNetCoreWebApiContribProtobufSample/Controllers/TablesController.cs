@@ -30,6 +30,7 @@ namespace AspNetCoreWebApiContribProtobufSample.Controllers
 
         // POST api/table
         [HttpPost]
+        [Produces("application/x-protobuf")]
         public IActionResult Post([FromBody]Table value)
         {
             var got = value;
