@@ -4,35 +4,36 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ProtobufHttpClient
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args) => RunAsync().GetAwaiter().GetResult();
+        public static async Task RunAsync()
         {
+            HttpClient httpClient = new HttpClient();
             Console.WriteLine("Get some data using protobuf");
 
-            var tables = CallServerAsync().Result;
+            var tables = await CallServerAsync(httpClient);
 
             Console.WriteLine($"Got a list of tables with {tables.Length} items");
             Console.ReadLine();
 
-            var table = PostStreamDataToServerAsync().Result;
+            var table = await PostStreamDataToServerAsync(httpClient);
 
             Console.WriteLine($"Sent data with Name: {table.Name} to the server");
-            //Console.ReadLine();
+            Console.ReadLine();
 
-            var tableB = PostStringDataToServerAsync().Result;
+            var tableB = await PostStringDataToServerAsync(httpClient);
 
             Console.WriteLine($"Sent data with Name: {tableB.Name} to the server");
             Console.ReadLine();
         }
 
-        static async System.Threading.Tasks.Task<Table[]> CallServerAsync()
+        static async Task<Table[]> CallServerAsync(HttpClient client)
         {
-            var client = new HttpClient();
-
             var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:31004/api/tables");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
             var result = await client.SendAsync(request);
@@ -40,9 +41,9 @@ namespace ProtobufHttpClient
             return tables;
         }
 
-        static async System.Threading.Tasks.Task<Table> PostStreamDataToServerAsync()
+        static async Task<Table> PostStreamDataToServerAsync(HttpClient client)
         {
-            HttpClient client = new HttpClient();
+            // not working...
             client.DefaultRequestHeaders
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
@@ -61,14 +62,13 @@ namespace ProtobufHttpClient
             request.Content = new ByteArrayContent(stream.ToArray());
 
             // HTTP POST with Protobuf Request Body
-            var responseForPost = client.SendAsync(request).Result;
+            var responseForPost = await client.SendAsync(request);
 
             var resultData = ProtoBuf.Serializer.Deserialize<Table>(await responseForPost.Content.ReadAsStreamAsync());
             return resultData;
         }
-        static async System.Threading.Tasks.Task<Table> PostStringDataToServerAsync()
+        static async Task<Table> PostStringDataToServerAsync(HttpClient client)
         {
-            HttpClient client = new HttpClient();
             client.DefaultRequestHeaders
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));//ACCEPT header
@@ -89,7 +89,7 @@ namespace ProtobufHttpClient
                 Encoding.UTF8,
                 "application/x-protobuf");//CONTENT-TYPE header
 
-            var responseForPost = client.SendAsync(request).Result;
+            var responseForPost = await client.SendAsync(request);
 
             var resultData = ProtoBuf.Serializer.Deserialize<Table>(await responseForPost.Content.ReadAsStreamAsync());
             return resultData;
