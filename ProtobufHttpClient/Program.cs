@@ -21,10 +21,11 @@ namespace ProtobufHttpClient
             Console.WriteLine($"Got a list of tables with {tables.Length} items");
             Console.ReadLine();
 
-            var table = await PostStreamDataToServerAsync(httpClient);
+            // NOT working
+            //var table = await PostStreamDataToServerAsync(httpClient);
 
-            Console.WriteLine($"Sent data with Name: {table.Name} to the server");
-            Console.ReadLine();
+            //Console.WriteLine($"Sent data with Name: {table.Name} to the server");
+            //Console.ReadLine();
 
             var tableB = await PostStringDataToServerAsync(httpClient);
 
@@ -41,32 +42,34 @@ namespace ProtobufHttpClient
             return tables;
         }
 
-        static async Task<Table> PostStreamDataToServerAsync(HttpClient client)
-        {
-            // not working...
-            client.DefaultRequestHeaders
-                  .Accept
-                  .Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
+        //static async Task<Table> PostStreamDataToServerAsync(HttpClient client)
+        //{
+        //    // not working...
+        //    client.DefaultRequestHeaders
+        //          .Accept
+        //          .Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
-                "http://localhost:31004/api/tables");
+        //    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
+        //        "http://localhost:31004/api/tables");
+        //    request.Headers.TryAddWithoutValidation("CONTENT-TYPE", "application/x-protobuf");
 
-            MemoryStream stream = new MemoryStream();
-            ProtoBuf.Serializer.Serialize<Table>(stream, new Table
-            {
-                Name = "jim",
-                Dimensions = "190x80x90",
-                Description = "top of the range from Migro"
-            });
+        //    MemoryStream stream = new MemoryStream();
+        //    ProtoBuf.Serializer.Serialize<Table>(stream, new Table
+        //    {
+        //        Name = "jim",
+        //        Dimensions = "190x80x90",
+        //        Description = "top of the range from Migro"
+        //    });
 
-            request.Content = new ByteArrayContent(stream.ToArray());
+        //    stream.Position = 0;
+        //    request.Content = new StreamContent(stream);
 
-            // HTTP POST with Protobuf Request Body
-            var responseForPost = await client.SendAsync(request);
+        //    // HTTP POST with Protobuf Request Body
+        //    var responseForPost = await client.SendAsync(request);
 
-            var resultData = ProtoBuf.Serializer.Deserialize<Table>(await responseForPost.Content.ReadAsStreamAsync());
-            return resultData;
-        }
+        //    var resultData = ProtoBuf.Serializer.Deserialize<Table>(await responseForPost.Content.ReadAsStreamAsync());
+        //    return resultData;
+        //}
         static async Task<Table> PostStringDataToServerAsync(HttpClient client)
         {
             client.DefaultRequestHeaders
