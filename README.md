@@ -6,4 +6,6 @@ https://www.nuget.org/packages/WebApiContrib.Core.Formatter.Protobuf/
 
 ## History
 
+2019-09-13 Updated nuget packages
+
 2019-02-16 Updated to .NET Core 2.2
