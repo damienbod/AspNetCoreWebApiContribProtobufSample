@@ -13,8 +13,8 @@ namespace AspNetCoreWebApiContribProtobufSample.Controllers
         {
             List<Table> tables = new List<Table>
             {
-                new Table{Name= "jim", Dimensions="190x80x90", Description="top of the range from Migro"},
-                new Table{Name= "jim large", Dimensions="220x100x90", Description="top of the range from Migro"}
+                new Table{Name= "jim", Dimensions="190x80x90", Description="top of the range from Migro", IntValue = int.MaxValue},
+                new Table{Name= "jim large", Dimensions="220x100x90", Description="top of the range from Migro", IntValue = int.MinValue}
             };
 
             return Ok(tables);
@@ -24,7 +24,7 @@ namespace AspNetCoreWebApiContribProtobufSample.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var table = new Table { Name = "jim", Dimensions = "190x80x90", Description = "top of the range from Migro" };
+            var table = new Table { Name = "jim", Dimensions = "190x80x90", Description = "top of the range from Migro", IntValue = 23263 };
             return Ok(table);
         }
 
